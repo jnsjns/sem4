@@ -3,6 +3,8 @@ package se.kth.hogk.sem4.controller;
 import se.kth.hogk.sem4.integration.ExternalSystemHandler;
 import se.kth.hogk.sem4.integration.ItemDTO;
 import se.kth.hogk.sem4.integration.ItemRegistry;
+import se.kth.hogk.sem4.integration.ItemRegistryException;
+import se.kth.hogk.sem4.integration.NoMatchingItemException;
 import se.kth.hogk.sem4.integration.Printer;
 import se.kth.hogk.sem4.model.Payment;
 import se.kth.hogk.sem4.model.Sale;
@@ -35,12 +37,17 @@ public class Controller {
      * 
      * @param itemId The ID of the scanned item that is added to the sale.
      * @return saleInfo contains a string of the sale that the view can display.
+     * @throws se.kth.hogk.sem4.integration.NoMatchingItemException
+     * @throws se.kth.hogk.sem4.controller.OperationFailedException
      */
-    public String addItem(int itemId){
-        ItemDTO item = itemRegistry.getItem(itemId);
-        if(item == null ) return "Item not found.";
-        String saleInfo = sale.addItem(item);
-        return saleInfo;
+    public String addItem(int itemId) throws NoMatchingItemException, OperationFailedException{
+        try {
+            ItemDTO item = exHandler.getItem(itemId);
+            String saleInfo = sale.addItem(item);
+            return saleInfo;
+        } catch (ItemRegistryException itemRegEx) {
+            throw new OperationFailedException("Could not add item to sale", itemRegEx);
+        }
     }
     /**
      * Completes the sale after all items has been added to the sale.

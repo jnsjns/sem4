@@ -9,7 +9,7 @@ import java.util.List;
  * @author Jonas
  */
 public class ItemRegistry {
-    private List<ItemDTO> items = new ArrayList<>();
+    private final List<ItemDTO> items = new ArrayList<>();
     /**
      * Creates all the items when an item registry is created.
      */
@@ -22,14 +22,15 @@ public class ItemRegistry {
      * found.
      * @param itemId The id of the item searched for
      * @return the item if it is found or null if not found.
+     * @throws se.kth.hogk.sem4.integration.NoMatchingItemException
      */
-    public ItemDTO getItem(int itemId){
+    public ItemDTO getItem(int itemId) throws NoMatchingItemException{
         for(ItemDTO item : items){
             if (item.getId() == itemId){
                 return item;
             }
         }
-        return null;
+       throw new NoMatchingItemException(itemId);
     }
     
     /**

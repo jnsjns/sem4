@@ -18,11 +18,16 @@ public class ExternalSystemHandler {
     }
     /**
      * Fetches a wanted item from the (@link ItemRegistry)
-     * @param ItemId the Id of the item searched for.
+     * @param itemId the Id of the item searched for.
      * @return the item found.
+     * @throws se.kth.hogk.sem4.integration.NoMatchingItemException
+     * @throws se.kth.hogk.sem4.integration.ItemRegistryException
      */
-    public ItemDTO getItem(int ItemId){
-        ItemDTO item = itemReg.getItem(ItemId);
+    public ItemDTO getItem(int itemId) throws NoMatchingItemException, ItemRegistryException{
+        if(itemId == 0){
+            throw new ItemRegistryException("Could not connect to database");
+        }
+        ItemDTO item = itemReg.getItem(itemId);
         return item;
     }
     

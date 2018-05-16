@@ -59,7 +59,6 @@ public class Sale {
      */  
     private String buildString(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Sale Information \n");
         for(OrderLine orderLine : orderLines){
             stringBuilder.append("Name: ")
                          .append(orderLine.getName())
@@ -67,7 +66,7 @@ public class Sale {
                          .append(orderLine.getPrice())
                          .append("\n");
         }
-        stringBuilder.append("\nRunning Total: ")
+        stringBuilder.append("Running Total: ")
                      .append(runningTotal)
                      .append("\n");
         return stringBuilder.toString();         
