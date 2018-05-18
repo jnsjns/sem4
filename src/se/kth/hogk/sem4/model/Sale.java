@@ -83,7 +83,6 @@ public class Sale {
      */
     public double completeSale(){    
         totalPrice = calculateTax();
-        notifyAllSaleObservers();
         return totalPrice;
     }
     
@@ -106,6 +105,7 @@ public class Sale {
        double change = payment.calculateChange(totalPrice);
        SaleDTO saleDTO = new SaleDTO(saleTime, orderLines, runningTotal, totalPrice);
        Receipt receipt = new Receipt(saleDTO, payment, change);
+       notifyAllSaleObservers();
        return (receipt.createPrintableReceipt());
     }
     

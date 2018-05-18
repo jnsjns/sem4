@@ -57,7 +57,7 @@ public class View {
             handleException("Tried to find non existant item, please try again ", noExcistingItem);
         }
         System.out.println("Total price to pay with tax: " + contr.completeSale());
-        contr.enterPaidAmount(200);
+        contr.enterPaidAmount(50);
     }
     
     private void handleException(String msg, Exception cause){
