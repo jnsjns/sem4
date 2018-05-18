@@ -1,5 +1,7 @@
 package se.kth.hogk.sem4.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import se.kth.hogk.sem4.integration.ExternalSystemHandler;
 import se.kth.hogk.sem4.integration.ItemDTO;
 import se.kth.hogk.sem4.integration.ItemRegistry;
@@ -8,6 +10,7 @@ import se.kth.hogk.sem4.integration.NoMatchingItemException;
 import se.kth.hogk.sem4.integration.Printer;
 import se.kth.hogk.sem4.model.Payment;
 import se.kth.hogk.sem4.model.Sale;
+import se.kth.hogk.sem4.model.SaleObserver;
 
 /**
  * This is the application's only controller. All calls to the model pass through here.
@@ -17,11 +20,16 @@ public class Controller {
     private final ItemRegistry itemRegistry;
     private final ExternalSystemHandler exHandler;
     private final Printer printer;
+    private List<SaleObserver> saleObserverList = new ArrayList<>();
     
     public Controller(ExternalSystemHandler exHandler){
         this.exHandler = new ExternalSystemHandler();
         this.printer = exHandler.getPrinter();
         this.itemRegistry = exHandler.getItemRegistry();
+    }   
+    
+    public void addSaleObserver(SaleObserver saleObserver){
+        saleObserverList.add(saleObserver);
     }
     
     /**
@@ -30,6 +38,8 @@ public class Controller {
      */
     public void startSale() {
         sale = new Sale();
+        sale.addSaleObserver(saleObserverList);
+        
     }
     /**
      * Fetches an item with corresponding itemID from the Item Registry and adds

@@ -39,9 +39,9 @@ public class SaleTest {
     @Test
     public void testAddItem() {
         Sale instance = new Sale();
-        String expResult = "Sale Information \n" +
+        String expResult = 
                             "Name: banana  Price: 20\n" +
-                            "\n" +
+                            
                             "Running Total: 20\n";
         String result = instance.addItem(new ItemDTO(1, "banana", 20));
         assertEquals(expResult, result);

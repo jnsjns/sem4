@@ -22,6 +22,7 @@ public class View {
      */
     public View(Controller contr) {
         this.contr = contr;
+        contr.addSaleObserver(new TotalRevenueView());
     }
     
     /**
@@ -44,8 +45,18 @@ public class View {
             }
         }       
         System.out.println("-->Completing sale");
-        double totalPrice = contr.completeSale();
-        System.out.println("Total price to pay with tax: " + totalPrice);
+        System.out.println("Total price to pay with tax: " + contr.completeSale());
+        contr.enterPaidAmount(200);
+        System.out.println("-->NEW SALE<--");
+        contr.startSale();  
+        try {
+            System.out.println(contr.addItem(inputList.get(2)));
+        } catch (OperationFailedException exception) {
+            handleException("Could not add item ", exception);
+        } catch (NoMatchingItemException noExcistingItem) {
+            handleException("Tried to find non existant item, please try again ", noExcistingItem);
+        }
+        System.out.println("Total price to pay with tax: " + contr.completeSale());
         contr.enterPaidAmount(200);
     }
     

@@ -17,6 +17,7 @@ public class Sale {
     private String itemName;
     private String saleInfo;
     private final List<OrderLine> orderLines;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
     private static final double TAX_PERCENTAGE = 15;
     
     
@@ -28,6 +29,11 @@ public class Sale {
         saleTime = LocalDateTime.now();  
         this.orderLines = new ArrayList<>();
     }
+    
+    public void addSaleObserver(List<SaleObserver> obs) {
+        this.saleObservers.addAll(obs);
+    }
+        
     /**
      * Saves an item to the sale and updates the <code>runningTotal</code>.
      * @param item The item that is to be added to the sale.
@@ -38,8 +44,7 @@ public class Sale {
         itemPrice = item.getPrice();
         runningTotal = runningTotal + itemPrice;
         createOrderLine(itemName, itemPrice);
-        saleInfo = buildString();
-        return saleInfo;
+        return saleInfo = buildString();
     }
     
     /**
@@ -76,8 +81,10 @@ public class Sale {
      * Finalizes the sale. Calculates the tax of the sale.
      * @return A double containing the new price after tax.
      */
-    public double completeSale(){       
-        return calculateTax();
+    public double completeSale(){    
+        totalPrice = calculateTax();
+        notifyAllSaleObservers();
+        return totalPrice;
     }
     
     /**
@@ -86,7 +93,7 @@ public class Sale {
      * @return The result of the multiplication.
      */
     private double calculateTax(){
-        return totalPrice = ((double)runningTotal * (1+TAX_PERCENTAGE/100));    
+        return ((double)runningTotal * (1+TAX_PERCENTAGE/100));    
     }
     
     /**
@@ -100,6 +107,12 @@ public class Sale {
        SaleDTO saleDTO = new SaleDTO(saleTime, orderLines, runningTotal, totalPrice);
        Receipt receipt = new Receipt(saleDTO, payment, change);
        return (receipt.createPrintableReceipt());
+    }
+    
+    public void notifyAllSaleObservers(){
+        for(SaleObserver saleObserver : saleObservers){
+            saleObserver.update(totalPrice);
+        }
     }
     
     public LocalDateTime getSaleTime(){
@@ -120,5 +133,8 @@ public class Sale {
     public String getSaleInfo(){
         return this.saleInfo;
     }
+
+
+
 
 }

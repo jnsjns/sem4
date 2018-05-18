@@ -35,7 +35,7 @@ public class ItemRegistryTest {
      * Test of getItem method, of class ItemRegistry.
      */
     @Test
-    public void testGetItem() {
+    public void testGetItem() throws NoMatchingItemException {
         int itemId = 1;
         ItemRegistry instance = new ItemRegistry();
         ItemDTO expResult = new ItemDTO(1, "banana", 20);
@@ -45,12 +45,11 @@ public class ItemRegistryTest {
         assertEquals(expResult.getPrice(), result.getPrice());
     }
     
-    @Test
-    public void testNotExistingGetItem() {
+    @Test(expected = NoMatchingItemException.class)
+    public void testNotExistingGetItem() throws NoMatchingItemException {
         int itemId = 500;
         ItemRegistry instance = new ItemRegistry();
         ItemDTO result = instance.getItem(itemId);
-        assertNull(result);
     }
 
 }
