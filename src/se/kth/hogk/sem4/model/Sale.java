@@ -30,6 +30,10 @@ public class Sale {
         this.orderLines = new ArrayList<>();
     }
     
+    /**
+     * Add sale observers to the list of observers.
+     * @param obs the list of observers to add.
+     */
     public void addSaleObserver(List<SaleObserver> obs) {
         this.saleObservers.addAll(obs);
     }
@@ -109,6 +113,10 @@ public class Sale {
        return (receipt.createPrintableReceipt());
     }
     
+    /**
+     * Notifies all the observers for this sale class, for example
+     * Total Revenue View class.
+     */
     public void notifyAllSaleObservers(){
         for(SaleObserver saleObserver : saleObservers){
             saleObserver.update(totalPrice);

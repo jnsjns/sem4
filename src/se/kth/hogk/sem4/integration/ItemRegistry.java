@@ -22,7 +22,7 @@ public class ItemRegistry {
      * found.
      * @param itemId The id of the item searched for
      * @return the item if it is found or null if not found.
-     * @throws se.kth.hogk.sem4.integration.NoMatchingItemException
+     * @throws NoMatchingItemException when the item is not found in registry.
      */
     public ItemDTO getItem(int itemId) throws NoMatchingItemException{
         for(ItemDTO item : items){

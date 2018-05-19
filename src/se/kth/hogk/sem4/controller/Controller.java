@@ -47,8 +47,8 @@ public class Controller {
      * 
      * @param itemId The ID of the scanned item that is added to the sale.
      * @return saleInfo contains a string of the sale that the view can display.
-     * @throws se.kth.hogk.sem4.integration.NoMatchingItemException
-     * @throws se.kth.hogk.sem4.controller.OperationFailedException
+     * @throws NoMatchingItemException when no item is found in database.
+     * @throws OperationFailedException when you can't add an item to sale.
      */
     public String addItem(int itemId) throws NoMatchingItemException, OperationFailedException{
         try {

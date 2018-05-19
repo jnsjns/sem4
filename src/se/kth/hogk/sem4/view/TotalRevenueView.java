@@ -8,7 +8,8 @@ package se.kth.hogk.sem4.view;
 import se.kth.hogk.sem4.model.SaleObserver;
 
 /**
- *
+ * The display that shows how much revenue has been acquired 
+ * since the start of the program
  * @author Jonas
  */
 public class TotalRevenueView implements SaleObserver{
@@ -16,8 +17,9 @@ public class TotalRevenueView implements SaleObserver{
     private double totalRevenue;
 
     /**
-     *
-     * @param amountPaid
+     * What is updated and printed when notified by an observer
+     * @param amountPaid the amount paid that is to be added to the revenue
+     * display.
      */
     @Override
     public void update(double amountPaid){

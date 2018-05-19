@@ -20,8 +20,8 @@ public class ExternalSystemHandler {
      * Fetches a wanted item from the (@link ItemRegistry)
      * @param itemId the Id of the item searched for.
      * @return the item found.
-     * @throws se.kth.hogk.sem4.integration.NoMatchingItemException
-     * @throws se.kth.hogk.sem4.integration.ItemRegistryException
+     * @throws NoMatchingItemException when no item is found in Item Registry.
+     * @throws ItemRegistryException when the connection to the database can't be established.
      */
     public ItemDTO getItem(int itemId) throws NoMatchingItemException, ItemRegistryException{
         if(itemId == 0){

@@ -6,7 +6,7 @@
 package se.kth.hogk.sem4.model;
 
 /**
- *
+ * The interface for the sale observers.
  * @author Jonas
  */
 public interface SaleObserver {
