@@ -5,10 +5,8 @@
  */
 package se.kth.hogk.sem4.controller;
 
-import se.kth.hogk.sem4.integration.ItemRegistryException;
-
 /**
- *
+ * The exception when the controller catches an unchecked exception in the integration layer.
  * @author Jonas
  */
 public class OperationFailedException extends Exception {

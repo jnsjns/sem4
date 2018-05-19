@@ -6,7 +6,7 @@
 package se.kth.hogk.sem4.integration;
 
 /**
- *
+ * The checked exception when the item is not found in registry.
  * @author Jonas
  */
 public class NoMatchingItemException extends Exception {
@@ -14,7 +14,10 @@ public class NoMatchingItemException extends Exception {
     
     public NoMatchingItemException(int itemId){
         super("Could not find any item in the item registry with item Id: " + itemId);
-        this.itemId = itemId;
+        this.itemId = itemId;   
+    }
     
-}
+    public int getItemId(){
+        return this.itemId;
+    }
 }

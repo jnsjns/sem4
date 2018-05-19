@@ -13,6 +13,7 @@ public class Printer {
     
     /**
      * Prints a string that is created by the (@link Receipt).
+     * @param stringToPrint the string to be printed
      */
     public void printReceipt(String stringToPrint){
         System.out.println(stringToPrint);

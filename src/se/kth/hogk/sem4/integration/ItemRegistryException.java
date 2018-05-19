@@ -6,7 +6,7 @@
 package se.kth.hogk.sem4.integration;
 
 /**
- *
+ * The unchecked exception when the program can't connect to the database.
  * @author Jonas
  */
 public class ItemRegistryException extends Exception {
